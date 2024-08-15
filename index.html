@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countries</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-blue-30">
+    <header class="py-5 shadow-md bg-white">
+      <div class="container mx-auto flex items-center justify-between">
+        <a class="country-text font-bold text-[50px] text-blue-800" href="/">
+          <h1 class="ml5">
+            <span class="text-wrapper">
+              <span class="line line1"></span>
+              <span class="letters letters-left">Countrys</span>
+              <span class="line line2"></span>
+            </span>
+          </h1>
+          
+      </a>
+        <div class="flex items-center gap-10">
+          <button
+            class="w-[50px] h-[50px] border-[2px] border-blue-300 text-black rounded-[50%] flex items-center justify-center"
+          >
+            0
+            <img
+              src="./images/like-svg.svg"
+              alt="svg"
+              width="25"
+              height="25"
+            />
+          </button>
+          <button
+            class="w-[50px] h-[50px] border-[2px] border-blue-300 text-black rounded-[50%] flex items-center justify-center"
+          >
+            0
+            <img
+              src="./images/save-svg.svg"
+              alt="svg"
+              width="25"
+              height="25"
+            />
+          </button>
+          <button
+            class="w-[50px] h-[50px] border-[2px] border-blue-300 text-[#1C274C] rounded-[50%] flex items-center justify-center"
+          >
+            <img
+              src="./images/moon-svg.svg"
+              alt="svg"
+              width="25"
+              heigh="25"
+            />
+          </button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="py-5 shadow-md">
+        <div class="container mx-auto">
+          <div class="flex items-center justify-between">
+            <input
+              class="search-input p-3 rounded-[10px] border-[1px] w-[250px] border-blue-600"
+              type="text"
+              placeholder="Searching..."
+            />
+            <select
+              class="country-select p-3 rounded-[10px] border-[1px] w-[250px] border-blue-600"
+            >
+              <option>All</option>
+            </select>
+          </div>
+          <ul
+            class="countries-list flex flex-wrap justify-between gap-3 mt-8"
+          ></ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script src="./js/countrys.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+            },
+          },
+        },
+      };
+    </script>
+  </body>
+</html>
