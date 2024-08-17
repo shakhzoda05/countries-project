@@ -1,6 +1,12 @@
 let elCountryList = document.querySelector(".countries-list");
 let elSelect = document.querySelector(".country-select");
 let elSerchInput = document.querySelector(".search-input");
+let tun =document.getElementById("tun")
+let kun =document.getElementById("kun")
+let body=document.querySelector("body")
+
+   
+
 
 function renderCountries(arr, list) {
   list.innerHTML = "";
@@ -18,8 +24,7 @@ function renderCountries(arr, list) {
     let elMoreImg = document.createElement("img");
 
     elItem.className =
-      "w-[360px] p-2 bg-[#E3F5FB] border-[1px] shadow-md position-relative rounded-[10px]";
-
+      "card w-[305px] p-2 bg-white shadow-md position-relative rounded-[10px] hover:bg-slate-50";
     elImg.src = value.flag;
     elImg.height = "150";
     elImg.className =
@@ -30,27 +35,27 @@ function renderCountries(arr, list) {
     elCapital.textContent = "Capital: " + value.capital;
     elPopulation.textContent = "Population: " + value.population;
     elIdTag.textContent = value.id;
-    // elLikeImg.textContent = value.like;
-    // elBasketImg.textContent = value.basket;
-    // elMoreImg.textContent = value.more;
+    elLikeImg.textContent = value.like;
+    elBasketImg.textContent = value.basket;
+    elMoreImg.textContent = value.more;
 
     elIdTag.className =
       " absolute-relative";
 
-    // actionImgWrappers.className = "flex items-center justify-center gap-3 pt-1";
-    // elLikeImg.src = value.like;
-    // elLikeImg.innerHTML =
-    //   '<svg width="300px" height="30px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="white" d="M35.885 11.833c0-5.45-4.418-9.868-9.867-9.868c-3.308 0-6.227 1.633-8.018 4.129c-1.791-2.496-4.71-4.129-8.017-4.129c-5.45 0-9.868 4.417-9.868 9.868c0 .772.098 1.52.266 2.241C1.751 22.587 11.216 31.568 18 34.034c6.783-2.466 16.249-11.447 17.617-19.959c.17-.721.268-1.469.268-2.242z"></path></svg>';
-    // elLikeImg.height = "25";
-    // elLikeImg.className = "w-[30px] h-[30px] text-red-500 block";
+    actionImgWrappers.className = "flex items-center justify-center gap-3 pt-1";
+    elLikeImg.src = value.like;
+    elLikeImg.innerHTML=`<img src="./images/like-svg.svg" alt="img"/>`
+    elLikeImg.height = "25";
+    elLikeImg.className = "w-[30px] h-[30px] text-red-500 block";
 
-    // elBasketImg.src = value.basket;
-    // elBasketImg.height = "25";
-    // elBasketImg.className = "w-[30px] h-[30px]";
+    elBasketImg.src = value.basket;
+    elBasketImg.height = "25";
+    elBasketImg.className = "w-[30px] h-[30px]";
 
-    // elMoreImg.src = value.more;
-    // elMoreImg.height = "25";
-    // elMoreImg.className = "w-[30px] h-[30px]  flex items-center justify-center";
+    elMoreImg.src = value.more;
+    elMoreImg.height = "25";
+    elMoreImg.className = "w-[30px] h-[30px]  flex items-center justify-center";
+
 
     actionImgWrappers.append(elLikeImg, elBasketImg, elMoreImg);
     elItem.append(
@@ -60,7 +65,9 @@ function renderCountries(arr, list) {
       elPopulation,
       elIdTag,
       actionImgWrappers,
-      actionText
+      actionText,
+   
+      
     );
     list.append(elItem);
   });
@@ -103,41 +110,33 @@ elSerchInput.addEventListener("keyup", (evt) => {
 // Countrys textini animatsiyasi
 anime.timeline({loop: true})
   .add({
-    targets: '.ml5 .line',
-    opacity: [0.5,1],
-    scaleX: [0, 1],
-    easing: "easeInOutExpo",
-    duration: 700
-  }).add({
-    targets: '.ml5 .line',
-    duration: 600,
+    targets: '.ml7 .letter',
+    translateY: ["1.1em", 0],
+    translateX: ["0.55em", 0],
+    translateZ: 0,
+    rotateZ: [180, 0],
+    duration: 900,
     easing: "easeOutExpo",
-    translateY: (el, i) => (-0.625 + 0.625*2*i) + "em"
+    delay: (el, i) => 60 * i
   }).add({
-    targets: '.ml5 .ampersand',
-    opacity: [0,1],
-    scaleY: [0.5, 1],
-    easing: "easeOutExpo",
-    duration: 600,
-    offset: '-=600'
-  }).add({
-    targets: '.ml5 .letters-left',
-    opacity: [0,1],
-    translateX: ["0.5em", 0],
-    easing: "easeOutExpo",
-    duration: 600,
-    offset: '-=300'
-  }).add({
-    targets: '.ml5 .letters-right',
-    opacity: [0,1],
-    translateX: ["-0.5em", 0],
-    easing: "easeOutExpo",
-    duration: 600,
-    offset: '-=600'
-  }).add({
-    targets: '.ml5',
+    targets: '.ml7',
     opacity: 0,
-    duration: 1000,
+    duration: 1500,
     easing: "easeOutExpo",
-    delay: 1000
+    delay: 1500
+  })
+
+
+
+  tun.addEventListener('click', ()=>{
+    body.classList.add('dark_bg');
+    tun.style.display='none';
+    kun.style.display='block';
   });
+
+  kun.addEventListener('click', ()=>{
+    body.classList.remove('dark_bg');
+    tun.style.display='block';
+    kun.style.display='none';
+  });
+
