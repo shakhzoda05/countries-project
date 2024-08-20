@@ -25,10 +25,10 @@
           
       </a>
         <div class="flex items-center gap-10">
-          <button
+          <button onclick="handleLikeCountBtnClick()"
             class="w-[50px] h-[50px] border-[2px] border-blue-300 text-black rounded-[50%] flex items-center justify-center"
           >
-            0
+            <span class="like-count">0</span>
             <img
               src="./images/like-svg.svg"
               alt="svg"
@@ -36,10 +36,10 @@
               height="25"
             />
           </button>
-          <button
+          <button onclick="handleSaveCountBtnClick()"
             class="w-[50px] h-[50px] border-[2px] border-blue-300 text-black rounded-[50%] flex items-center justify-center"
           >
-            0
+            <span class="saved-count">0</span>
             <img
               src="./images/save-svg.svg"
               alt="svg"
@@ -91,6 +91,17 @@
         </div>
       </section>
     </main>
+
+
+    <div id="wrapper" class="modal-wrapper fixed top-0 bottom-0 left-0 right-0 backdrop-blur duration-300 scale-0">
+      <div class="modal-inner absolute w-[550px] h-[350px] bg-white shadow-md rounded-lg m-auto top-0 bottom-0 left-0 right-0">
+        <button onclick="closeBtnClick()" class="absolute top-0 right-0">
+          <img src="./images/close.svg" alt="svg" width="25" height="25">
+        </button>
+        <div class="modal-content"></div>
+      </div>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <script src="./js/countrys.js"></script>

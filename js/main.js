@@ -1,78 +1,114 @@
 let elCountryList = document.querySelector(".countries-list");
 let elSelect = document.querySelector(".country-select");
 let elSerchInput = document.querySelector(".search-input");
-let tun =document.getElementById("tun")
-let kun =document.getElementById("kun")
+let elModalContent=document.querySelector(".modal-content")
+let tun=document.getElementById("tun")
+let kun=document.getElementById("kun")
 let body=document.querySelector("body")
 
+let elModalWrapper=document.querySelector(".modal-wrapper")
+let elModalInner=document.querySelector(".modal-inner")
+
+let likeCount=document.querySelector(".like-count")
+let savedCount=document.querySelector(".saved-count")
+
+
    
+function renderCountry(arr){
+  elCountryList.innerHTML=null
+  arr.forEach(item=>{
+    let countryItem=document.createElement("li")
+    countryItem.className="w-[300px] bg-white rounded-md p-2"
+    countryItem.innerHTML=` 
+    <img class="w-[100%] h-[50%] rounded-[5px]  border-[1px] border-slate-200" src=${item.flag} alt="flag" width="100%" height="200"/>
+    <h2>Country:${item.name}</h2>
+    <p>Capital:${item.capital}</p>
+    <p>Population:${item.population}</p>
+    <p>${item.id}
+    <div class="flex items-center justify-center gap-3 pt-1">
+    <button onclick="handleLikeBtnClick(${item.id})" class="${item.isLiked ? "bg-red-600":"bg-slate-400"} text-[18px] font-semibold p-1 rounded-md text-white">Like</button>
+    <button onclick="handleSavedBtnClick(${item.id})" class="${item.isSaved ? "bg-green-600":"bg-slate-400"} text-[18px] text-white font-semibold p-1 bg-slate-400 rounded-md">Save</button>
+    <button onclick="handleMoreBtnClick(${item.id})" class="text-[18px] bg-blue-500 text-white font-semibold p-1 rounded-md">More</button>
+    </div>
+    `
+    elCountryList.appendChild(countryItem)
+  })
 
-
-function renderCountries(arr, list) {
-  list.innerHTML = "";
-  arr.forEach((value) => {
-    let elItem = document.createElement("li");
-    let elImg = document.createElement("img");
-    let elName = document.createElement("h2");
-    let elCapital = document.createElement("p");
-    let elPopulation = document.createElement("p");
-    let elIdTag = document.createElement("span");
-
-    let actionImgWrappers = document.createElement("div");
-    let elLikeImg = document.createElement("img");
-    let elBasketImg = document.createElement("img");
-    let elMoreImg = document.createElement("img");
-
-    elItem.className =
-      "card w-[305px] p-2 bg-white shadow-md position-relative rounded-[10px] hover:bg-slate-50";
-    elImg.src = value.flag;
-    elImg.height = "150";
-    elImg.className =
-      "w-[100%] h-[50%] rounded-[5px]  border-[1px] border-slate-200";
-
-    let actionText = document.createElement("div");
-    elName.textContent = "Country: " + value.name;
-    elCapital.textContent = "Capital: " + value.capital;
-    elPopulation.textContent = "Population: " + value.population;
-    elIdTag.textContent = value.id;
-    elLikeImg.textContent = value.like;
-    elBasketImg.textContent = value.basket;
-    elMoreImg.textContent = value.more;
-
-    elIdTag.className =
-      " absolute-relative";
-
-    actionImgWrappers.className = "flex items-center justify-center gap-3 pt-1";
-    elLikeImg.src = value.like;
-    elLikeImg.innerHTML=`<img src="./images/like-svg.svg" alt="img"/>`
-    elLikeImg.height = "25";
-    elLikeImg.className = "w-[30px] h-[30px] text-red-500 block";
-
-    elBasketImg.src = value.basket;
-    elBasketImg.height = "25";
-    elBasketImg.className = "w-[30px] h-[30px]";
-
-    elMoreImg.src = value.more;
-    elMoreImg.height = "25";
-    elMoreImg.className = "w-[30px] h-[30px]  flex items-center justify-center";
-
-
-    actionImgWrappers.append(elLikeImg, elBasketImg, elMoreImg);
-    elItem.append(
-      elImg,
-      elName,
-      elCapital,
-      elPopulation,
-      elIdTag,
-      actionImgWrappers,
-      actionText,
-   
-      
-    );
-    list.append(elItem);
-  });
+  likeCount.textContent=arr.filter(item=>item.isLiked==true).length
+  savedCount.textContent=arr.filter(item=>item.isSaved==true).length
 }
-renderCountries(countrys, elCountryList);
+renderCountry(countrys)
+
+function handleMoreBtnClick(id){
+  elModalWrapper.classList.remove("scale-0")
+
+  const findedObj=countrys.find(item=>item.id==id)
+  console.log(findedObj)
+  elModalContent.innerHTML=`
+  <div class="flex justify-between items-center m-20 gap-6"> 
+     <div class="w-[60%]">
+   <img class="w-[100%] h-[50%] rounded-[5px]  border-[1px] border-slate-200" src=${findedObj.flag} alt="flag" width="100%" height="200"/>
+     </div>
+     <div class="w-[40%]">
+      <h2>Country: ${findedObj.name}</h2>
+    <p>Capital: ${findedObj.capital}</p>
+    <p>Population: ${findedObj.population}</p>
+    </div>
+   </div>    
+    `
+
+}
+
+// Modal Start 
+elModalWrapper.addEventListener("click", function(e){
+  if(e.target.id=="wrapper"){
+    elModalWrapper.classList.add("scale-0")
+  }
+})
+function closeBtnClick(){
+  elModalWrapper.classList.add("scale-0")
+}
+// Modal end 
+
+// Like btn click start
+function handleLikeBtnClick(id){
+  const findedObj=countrys.find(item => item.id==id)
+  findedObj.isLiked=!findedObj.isLiked
+  renderCountry(countrys);
+}
+// Like btn click finish
+
+// saved btn start
+function handleSavedBtnClick(id){
+  const findedObj=countrys.find(item => item.id==id)
+  findedObj.isSaved=!findedObj.isSaved
+  renderCountry(countrys);
+}
+  // saved btn finish
+
+  // like list
+  function handleLikeCountBtnClick(){
+    const filteredArr=countrys.filter(item=>item.isLiked==true)
+    renderCountry(filteredArr)
+  }
+
+
+  function handleSaveCountBtnClick(){
+    const filteredArr=countrys.filter(item=>item.isSaved==true)
+    renderCountry(filteredArr)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 countrys.forEach((value) => {
   let elOption = document.createElement("option");
@@ -80,6 +116,7 @@ countrys.forEach((value) => {
   elOption.setAttribute("value", value.capital);
   elSelect.append(elOption);
 });
+
 
 elSelect.addEventListener("change", (evt) => {
   if (evt.target.value == "All") {
@@ -106,6 +143,31 @@ elSerchInput.addEventListener("keyup", (evt) => {
     renderCountries(serchedList, elCountryList);
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Countrys textini animatsiyasi
 anime.timeline({loop: true})
