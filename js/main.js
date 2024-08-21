@@ -39,6 +39,7 @@ function renderCountry(arr){
 }
 renderCountry(countrys)
 
+
 function handleMoreBtnClick(id){
   elModalWrapper.classList.remove("scale-0")
 
@@ -98,18 +99,7 @@ function handleSavedBtnClick(id){
     renderCountry(filteredArr)
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
+  
 countrys.forEach((value) => {
   let elOption = document.createElement("option");
   elOption.innerHTML = `${value.name} - ${value.capital}`;
@@ -120,12 +110,12 @@ countrys.forEach((value) => {
 
 elSelect.addEventListener("change", (evt) => {
   if (evt.target.value == "All") {
-    renderCountries(countrys, elCountryList);
+    renderCountry(countrys, elCountryList);
   } else {
     const selectedList = countrys.filter(
       (item) => item.capital == evt.target.value
     );
-    renderCountries(selectedList, elCountryList);
+    renderCountry(selectedList, elCountryList);
   }
 });
 
@@ -135,38 +125,14 @@ elSerchInput.addEventListener("keyup", (evt) => {
     const serchedList = countrys.filter((item) =>
       String(item.population).toLowerCase().includes(serchValeu.trim())
     );
-    renderCountries(serchedList, elCountryList);
+    renderCountry(serchedList, elCountryList);
   } else {
     const serchedList = countrys.filter((item) =>
       item.name.toLowerCase().includes(serchValeu.trim().toLowerCase())
     );
-    renderCountries(serchedList, elCountryList);
+    renderCountry(serchedList, elCountryList);
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Countrys textini animatsiyasi
